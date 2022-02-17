@@ -1,0 +1,25 @@
+.inputBox {
+  margin-bottom: 2.5rem;
+}
+
+.inputName {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  color: #254050;
+}
+
+.input {
+  text-align: start;
+  padding: 1rem 9rem;
+  background: #f5f9ff;
+  border: 4px solid #82a9ff;
+  border-radius: 12.5rem;
+  outline: none;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+}

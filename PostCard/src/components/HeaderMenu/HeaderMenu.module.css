@@ -1,0 +1,39 @@
+.headerMenu {
+  display: flex;
+  align-items: center;
+  padding: 3rem 4rem 3.5rem 15rem;
+  margin: 0 auto;
+  z-index: 1;
+  background: #f8fafe;
+}
+
+.burgerMenu {
+  cursor: pointer;
+  width: 2rem;
+  margin: 0 2.5rem 0 0;
+}
+
+.userAva {
+  width: 2rem;
+  margin: 0 1rem 0 0;
+}
+
+.userName {
+  margin-right: 12.5rem;
+  font-size: 1.5rem;
+  color: #016efc;
+}
+
+.input {
+  width: 100%;
+  max-width: 47rem;
+  margin: 0 0 0 auto;
+  padding: 0.5rem;
+  border: 2px solid #f8fafe;
+  background-color: #f8fafe;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid #016efc;
+}

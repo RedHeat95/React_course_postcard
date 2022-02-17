@@ -1,0 +1,34 @@
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 15rem 4.5rem 15rem;
+  margin: 0 auto;
+  background: #016efc;
+}
+
+.imgClose {
+  cursor: pointer;
+}
+
+.logReg {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: 2.2rem 0 0 6.5rem;
+}
+
+.logReg > .allPosts,
+.logReg > .log,
+.logReg > .reg {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  padding-bottom: 1rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.logReg :last-child {
+  padding-bottom: 0;
+}
