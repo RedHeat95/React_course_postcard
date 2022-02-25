@@ -14,9 +14,6 @@ export const RegisterForm = () => {
         onChange={() => {}}
       />
       <Button text="Login" onClick={() => {}} />
-      <p>
-        If you have account, you can <a href="">login</a>
-      </p>
     </>
   );
 };

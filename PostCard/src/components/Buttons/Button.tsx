@@ -1,7 +1,7 @@
-import styles from "./Button.module.css";
 import { useContext } from "react";
-import { Context } from "../../Context/Context";
 
+import styles from "./Button.module.css";
+import { Context } from "../../App";
 interface IBtn {
   text: string;
   onClick: () => void;
@@ -9,7 +9,7 @@ interface IBtn {
 
 export const Button = ({ text, onClick }: IBtn) => {
   return (
-    <div>
+    <div className={styles.btnWrraper}>
       <button className={styles.btn} onClick={onClick}>
         {text}
       </button>
@@ -22,15 +22,18 @@ interface IBtnTogle {
 }
 
 export const ButtonTogle = ({ onClick }: IBtnTogle) => {
-  const contextValue = useContext(Context);
   const { isDark } = useContext(Context);
-  {
-    /* <label className={isDark ? `${styles.switch}` : `${styles.switchDark}`}></label> */
-  }
+
   return (
-    <label className={isDark ? styles.switchw : styles.switch}>
+    <label className={styles.switch}>
       <input type="checkbox" onClick={onClick} />
-      <span className={isDark ? styles.sliderw : styles.slider}></span>
+      <span
+        className={
+          isDark
+            ? `${styles.round} ${styles.sliderLeft}`
+            : `${styles.round} ${styles.slider}`
+        }
+      ></span>
     </label>
   );
 };

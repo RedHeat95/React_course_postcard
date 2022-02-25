@@ -1,7 +1,48 @@
 .wrapper {
+  max-width: 85rem;
+  margin: 0 auto;
+}
+.title {
+  /* padding-top: 1rem; */
+}
+
+.titleBtn {
+  display: flex;
+  align-items: center;
+}
+
+.allPostsTitle {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  line-height: 145.2%;
+  color: #016efc;
+  padding-right: 2rem;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchTitle {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 145.2%;
+  color: #016efc;
+  padding-right: 1rem;
+  max-width: 24rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.allPosts {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .showMore {

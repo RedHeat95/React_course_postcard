@@ -1,10 +1,15 @@
+.headerMenuWrraper {
+  background-color: #f8fafe;
+}
+
 .headerMenu {
+  max-width: 85rem;
+  margin: 0 auto;
+  padding: 3rem 0;
   display: flex;
   align-items: center;
-  padding: 3rem 4rem 3.5rem 15rem;
-  margin: 0 auto;
   z-index: 1;
-  background: #f8fafe;
+  background-color: #f8fafe;
 }
 
 .burgerMenu {

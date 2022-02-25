@@ -1,14 +1,19 @@
+.navBarWrraper {
+  background: #016efc;
+}
+
 .navBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 15rem 4.5rem 15rem;
+  max-width: 85rem;
   margin: 0 auto;
-  background: #016efc;
+  padding: 2.9rem 0 4.5rem;
 }
 
 .imgClose {
   cursor: pointer;
+  color: #ffffff;
 }
 
 .logReg {

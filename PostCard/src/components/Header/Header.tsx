@@ -1,5 +1,6 @@
-import styles from "./Header.module.css";
 import { useState } from "react";
+
+import styles from "./Header.module.css";
 import { HeaderMenu } from "../HeaderMenu/HeaderMenu";
 import { NavBar } from "../NavBar/NavBar";
 

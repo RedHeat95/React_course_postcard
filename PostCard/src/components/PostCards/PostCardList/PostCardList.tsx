@@ -1,35 +1,56 @@
-import styles from "./PostCardList.module.css";
-import { useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { IPostCard, PostCard } from "../PostCardItem/PostItem";
+import { useDispatch, useSelector } from "react-redux";
+
+import { IState } from "../../../redux/store";
+import { fetchPosts } from "../../../redux/actions/postsActions";
+import { IPost } from "../../../redux/reducers/postsReducer";
+
+import styles from "./PostCardList.module.css";
+import { PostCard } from "../PostCardItem/PostItem";
+import { Search } from "../../Search/Search";
 import { Button } from "../../Buttons/Button";
 
-const LIMIT = 5;
+const LIMIT = 4;
 
 export const PostCards = () => {
-  const [posts, setPosts] = useState<IPostCard[]>([]);
-  const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetch(
-      `https://studapi.teachmeskills.by/blog/posts/?limit=${LIMIT}&offset=${offset}`
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        setPosts([...posts, ...result.results]);
-      });
-  }, [offset]);
-
-  const loadMore = useCallback(() => {
-    setOffset(posts.length);
-  }, [posts]);
+  const dispatch = useDispatch();
 
   const history = useHistory();
 
+  const posts = useSelector((state: IState) => state.postsReducer.posts);
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, []);
+
+  const [search, setSearch] = useState("");
+
+  const newEmojies = posts.filter((post) => {
+    if (post.title.toLowerCase().includes(search.toLowerCase())) {
+      return post;
+    }
+  });
+
+  const postsSliced = newEmojies.slice(0, LIMIT * page);
+
+  const showMore = () => {
+    setPage(page + 1);
+  };
+
   return (
-    <div>
-      <div className={styles.wrapper}>
-        {posts.map((item: IPostCard) => (
+    <div className={styles.wrapper}>
+      <div className={styles.title}>
+        <div className={styles.titleBtn}>
+          <p className={styles.allPostsTitle}>All posts</p>
+          <Button text="+ Add" onClick={() => {}} />
+        </div>
+        <Search search={search} setSearch={setSearch} />
+      </div>
+      <div className={styles.allPosts}>
+        {postsSliced.map((item: IPost) => (
           <div
             key={item.id}
             onClick={() => {
@@ -47,7 +68,7 @@ export const PostCards = () => {
         ))}
       </div>
       <div className={styles.showMore}>
-        <Button text="Show more" onClick={loadMore} />
+        <Button text="Show more" onClick={showMore} />
       </div>
     </div>
   );

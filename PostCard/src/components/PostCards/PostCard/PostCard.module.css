@@ -1,7 +1,19 @@
 .wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  max-width: 85rem;
+  margin: 0 auto;
+}
+
+.selectPostTitle {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  line-height: 145.2%;
+  color: #016efc;
+}
+
+.selectPost {
+  zoom: 200%;
 }
 
 .showMore {

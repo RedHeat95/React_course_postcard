@@ -2,13 +2,10 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  width: 18.5rem;
-  margin: 1rem;
+  width: 21rem;
+  margin: 1rem 2.5rem 0.5rem 0;
   padding: 1.5rem;
-  background: #ffffff;
-  border: 1px solid #c6ddff;
-  box-sizing: border-box;
-  box-shadow: 0px 6px 50px rgba(184, 196, 209, 0.15);
+  background-color: #ffffff;
   border-radius: 13px;
 }
 
@@ -16,26 +13,24 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  width: 18.5rem;
-  margin: 1rem;
+  width: 21rem;
+  margin: 1rem 2.5rem 0.5rem 0;
   padding: 1.5rem;
-  background: #016efc;
-  border: 1px solid #c6ddff;
-  box-sizing: border-box;
-  box-shadow: 0px 6px 50px rgba(184, 196, 209, 0.15);
+  background-color: #016efc;
   border-radius: 13px;
 }
 
 .img {
   margin-bottom: 0.5rem;
-  max-height: 7.5rem;
-  border: 1px solid #ebebeb;
-  box-sizing: border-box;
+  height: 7.5rem;
   border-radius: 11px;
+  object-fit: cover;
 }
 
 .title {
   padding-bottom: 0.5rem;
+  font-family: Raleway;
+  font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 23px;
@@ -44,6 +39,8 @@
 
 .titleDark {
   padding-bottom: 0.5rem;
+  font-family: Raleway;
+  font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 23px;
@@ -53,26 +50,44 @@
 .text {
   max-width: 18.5rem;
   padding-bottom: 0.5rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
   font-size: 16px;
   line-height: 19px;
   color: #979797;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .textDark {
   max-width: 18.5rem;
   padding-bottom: 0.5rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
   font-size: 16px;
   line-height: 19px;
   color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .date {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
   font-size: 16px;
   line-height: 19px;
   color: #016efc;
 }
 
 .dateDark {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
   font-size: 16px;
   line-height: 19px;
   color: #ffffff;

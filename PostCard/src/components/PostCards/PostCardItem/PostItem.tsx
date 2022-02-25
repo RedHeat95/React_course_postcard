@@ -1,16 +1,10 @@
 import { useContext } from "react";
+
 import styles from "./PostItem.module.css";
-import { Context } from "../../../Context/Context";
+import { Context } from "../../../App.js";
+import { IPost } from "../../../redux/reducers/postsReducer";
 
-export interface IPostCard {
-  id: string;
-  image: string;
-  title: string;
-  text: string;
-  date: string;
-}
-
-export function PostCard({ id, image, title, text, date }: IPostCard) {
+export function PostCard({ id, image, title, text, date }: IPost) {
   const { isDark } = useContext(Context);
   return (
     <div
@@ -18,11 +12,17 @@ export function PostCard({ id, image, title, text, date }: IPostCard) {
       className={isDark ? `${styles.wrapperDark}` : `${styles.wrapper}`}
     >
       <img className={styles.img} src={image} />
-      <h1 className={isDark ? `${styles.titleDark}` : `${styles.title}`}>
-        {title}
-      </h1>
-      <p className={isDark ? `${styles.textDark}` : `${styles.text}`}>{text}</p>
-      <p className={isDark ? `${styles.dateDark}` : `${styles.date}`}>{date}</p>
+      <div>
+        <h1 className={isDark ? `${styles.titleDark}` : `${styles.title}`}>
+          {title}
+        </h1>
+        <p className={isDark ? `${styles.textDark}` : `${styles.text}`}>
+          {text}
+        </p>
+        <p className={isDark ? `${styles.dateDark}` : `${styles.date}`}>
+          {date}
+        </p>
+      </div>
     </div>
   );
 }
