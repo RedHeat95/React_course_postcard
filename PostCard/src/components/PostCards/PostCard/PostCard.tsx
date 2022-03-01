@@ -17,12 +17,10 @@ export interface IPostCardWithId extends IPost {
 
 export const Post = () => {
   const params: IPostCardWithId = useParams();
-
-  const post = useSelector((state: IState) => state.postsReducer.post);
-
+  const history = useHistory();
   const dispatch = useDispatch();
 
-  const history = useHistory();
+  const post = useSelector((state: IState) => state.postsReducer.post);
 
   useEffect(() => {
     dispatch(fetchPost(params.postId));

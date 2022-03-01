@@ -1,23 +1,29 @@
-import { ChangeEvent } from "react";
+import { ChangeEventHandler, KeyboardEventHandler } from "react";
+
 import styles from "./Search.module.css";
 
 interface IProps {
-  search: string;
-  setSearch: (value: string) => void;
+  value: string;
+  type?: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
 
-export const Search = ({ search, setSearch }: IProps) => {
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
-
+export const Search = ({
+  value,
+  type = "text",
+  onChange,
+  onKeyDown,
+}: IProps) => {
   return (
     <div className={styles.searchPosts}>
       <p className={styles.searchTitle}>Search</p>
       <input
         className={styles.searchInput}
-        value={search}
+        type={type}
+        value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </div>
   );

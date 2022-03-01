@@ -31,3 +31,7 @@
   font-size: 25px;
   line-height: 29px;
 }
+
+.error {
+  border: 4px solid #700707;
+}

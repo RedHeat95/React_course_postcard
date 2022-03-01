@@ -11,6 +11,7 @@ interface IProps {
 
 export const NavBar = ({ closeNavBar }: IProps) => {
   const { changeIsDark } = useContext(Context);
+
   return (
     <div className={styles.navBarWrraper}>
       <div className={styles.navBar}>

@@ -16,7 +16,7 @@ export interface IPostsState {
 const defaultState: IPostsState = {
   posts: [],
   post: {
-    id: "0",
+    id: "",
     image: "",
     title: "",
     text: "",
@@ -42,7 +42,7 @@ export const postsReducer = (state = defaultState, action: any) => {
   if (action.type === ACTIONS.DELETE_POST) {
     return {
       ...state,
-      post: { id: 0, image: "", text: "", date: "", title: "" },
+      post: { id: "", image: "", text: "", date: "", title: "" },
     };
   }
 

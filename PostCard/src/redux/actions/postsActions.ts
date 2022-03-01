@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+
 import { ACTIONS } from "../constants";
 import { IPost } from "../reducers/postsReducer";
 
@@ -15,6 +16,7 @@ export function fetchPosts() {
       `https://studapi.teachmeskills.by/blog/posts/?limit=100`
     );
     const result = await response.json();
+
     dispatch(addPosts(result.results));
   };
 }
@@ -32,6 +34,7 @@ export function fetchPost(postId: string) {
       "https://studapi.teachmeskills.by/blog/posts/" + postId
     );
     const post = await response.json();
+
     dispatch(addPost(post));
   };
 }
@@ -39,3 +42,15 @@ export function fetchPost(postId: string) {
 export function deletePost() {
   return { type: ACTIONS.DELETE_POST };
 }
+
+export const searchPosts = (search: string) => {
+  return async (dispatch: Dispatch) => {
+    const response = await fetch(
+      `https://studapi.teachmeskills.by/blog/posts/?search=${search}&limit=100`
+    );
+
+    const result = await response.json();
+
+    dispatch(addPosts(result.results));
+  };
+};

@@ -1,44 +1,83 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IState } from "../../../redux/store";
-import { fetchPosts } from "../../../redux/actions/postsActions";
+import { IState, store } from "../../../redux/store";
+import { fetchPosts, searchPosts } from "../../../redux/actions/postsActions";
 import { IPost } from "../../../redux/reducers/postsReducer";
 
 import styles from "./PostCardList.module.css";
 import { PostCard } from "../PostCardItem/PostItem";
 import { Search } from "../../Search/Search";
 import { Button } from "../../Buttons/Button";
+import { idText } from "typescript";
 
 const LIMIT = 4;
 
-export const PostCards = () => {
-  const [page, setPage] = useState(1);
+function debounce(fun: (text: string) => void, ms: number) {
+  let isCooldown = false;
 
-  const dispatch = useDispatch();
+  return function (searchText: string) {
+    if (isCooldown) {
+      return;
+    }
+
+    fun(searchText);
+    isCooldown = true;
+    console.log(searchText, isCooldown);
+    setTimeout(() => {
+      isCooldown = false;
+      console.log("isCooldown", isCooldown);
+    }, ms);
+  };
+}
+
+const delayedSearch = debounce(
+  (text: string) => store.dispatch(searchPosts(text)),
+  1000
+);
+
+export const PostCards = () => {
+  const [offset, setOffset] = useState(1);
+  const [search, setSearch] = useState("");
 
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  // const [count, setCount] = useState(0);
+  // const [page, setPage] = useState(1);
 
   const posts = useSelector((state: IState) => state.postsReducer.posts);
 
   useEffect(() => {
     dispatch(fetchPosts());
-  }, []);
+  }, [offset]);
 
-  const [search, setSearch] = useState("");
+  useEffect(() => {
+    delayedSearch(search);
+  }, [search]);
 
-  const newEmojies = posts.filter((post) => {
-    if (post.title.toLowerCase().includes(search.toLowerCase())) {
-      return post;
-    }
-  });
+  const onChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setSearch(event.target.value);
+    },
+    [setSearch]
+  );
 
-  const postsSliced = newEmojies.slice(0, LIMIT * page);
+  const onKeyDown = useCallback(
+    (event) => {
+      if (event.key === "Enter") {
+        dispatch(searchPosts(search));
+      }
+    },
+    [search]
+  );
 
-  const showMore = () => {
-    setPage(page + 1);
-  };
+  const postsSliced = posts.slice(0, LIMIT * offset);
+
+  const showMore = useCallback(() => {
+    setOffset(offset + 1);
+  }, [posts]);
 
   return (
     <div className={styles.wrapper}>
@@ -47,29 +86,38 @@ export const PostCards = () => {
           <p className={styles.allPostsTitle}>All posts</p>
           <Button text="+ Add" onClick={() => {}} />
         </div>
-        <Search search={search} setSearch={setSearch} />
+        <Search value={search} onChange={onChange} onKeyDown={onKeyDown} />
       </div>
-      <div className={styles.allPosts}>
-        {postsSliced.map((item: IPost) => (
-          <div
-            key={item.id}
-            onClick={() => {
-              history.push("/post/" + item.id);
-            }}
-          >
-            <PostCard
-              id={item.id}
-              image={item.image}
-              title={item.title}
-              text={item.text}
-              date={item.date}
-            />
+      {posts ? (
+        <>
+          <div className={styles.allPosts}>
+            {postsSliced.map((item: IPost) => (
+              <div
+                key={item.id}
+                onClick={() => {
+                  history.push("/post/" + item.id);
+                }}
+              >
+                <PostCard
+                  id={item.id}
+                  image={item.image}
+                  title={item.title}
+                  text={item.text}
+                  date={item.date}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className={styles.showMore}>
-        <Button text="Show more" onClick={showMore} />
-      </div>
+
+          <div className={styles.showMore}>
+            <Button text="Show more" onClick={showMore} />
+          </div>
+        </>
+      ) : (
+        <div>
+          <h1>NO posts...</h1>
+        </div>
+      )}
     </div>
   );
 };

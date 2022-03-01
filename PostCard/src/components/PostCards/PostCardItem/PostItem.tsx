@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import styles from "./PostItem.module.css";
-import { Context } from "../../../App.js";
+import { Context } from "../../../App";
 import { IPost } from "../../../redux/reducers/postsReducer";
 
 export function PostCard({ id, image, title, text, date }: IPost) {
@@ -20,7 +20,7 @@ export function PostCard({ id, image, title, text, date }: IPost) {
           {text}
         </p>
         <p className={isDark ? `${styles.dateDark}` : `${styles.date}`}>
-          {date}
+          {date.split("-").reverse().join(".")}
         </p>
       </div>
     </div>

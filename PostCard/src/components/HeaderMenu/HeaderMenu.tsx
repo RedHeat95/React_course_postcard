@@ -1,10 +1,15 @@
+import { useContext } from "react";
+
 import styles from "./HeaderMenu.module.css";
+import { Context } from "../../App";
 
 interface IProps {
   openNavBar: () => void;
 }
 
 export const HeaderMenu = ({ openNavBar }: IProps) => {
+  const { theme } = useContext(Context);
+
   return (
     <div className={styles.headerMenuWrraper}>
       <div className={styles.headerMenu}>
