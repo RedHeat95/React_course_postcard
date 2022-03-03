@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .formWrapper {
@@ -14,6 +15,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  margin-bottom: 3rem;
 }
 
 .active {
@@ -48,7 +50,6 @@
   font-weight: normal;
   font-size: 25px;
   line-height: 134%;
-  color: #254050;
 }
 
 .formText > a {
@@ -57,7 +58,6 @@
   font-weight: bold;
   font-size: 25px;
   line-height: 134%;
-  color: #016efc;
   text-decoration: none;
   padding-left: 1rem;
 }

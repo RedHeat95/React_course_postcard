@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { validationService } from "../../services/validation";
 
 import { Input } from "../Input/Input";
-import { Button } from "../Buttons/Button";
+import { Button } from "../Buttons/Button/Button";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
@@ -14,17 +14,21 @@ export const LoginForm = () => {
     password: "",
   });
 
-  const inChangeEmail = useCallback((event) => {
+  const onChangeEmail = useCallback((event) => {
     const value = event.target.value;
     setEmail(value);
+
     const error = validationService.validateEmail(value);
+
     setErrors((errors) => ({ ...errors, email: error }));
   }, []);
 
-  const inChangePassword = useCallback((event) => {
+  const onChangePassword = useCallback((event) => {
     const value = event.target.value;
     setPassword(value);
+
     const error = validationService.validatePassword(value);
+
     setErrors((errors) => ({ ...errors, password: error }));
   }, []);
 
@@ -40,16 +44,16 @@ export const LoginForm = () => {
     <>
       <Input
         type="email"
-        text="Email"
+        label="Email"
         value={email}
-        onChange={inChangeEmail}
+        onChange={onChangeEmail}
         error={errors.email}
       />
       <Input
         type="password"
-        text="Password"
+        label="Password"
         value={password}
-        onChange={inChangePassword}
+        onChange={onChangePassword}
         error={errors.password}
       />
       <Button text="Login" onClick={onClick} />

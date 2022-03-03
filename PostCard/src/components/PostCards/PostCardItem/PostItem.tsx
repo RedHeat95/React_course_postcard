@@ -4,22 +4,40 @@ import styles from "./PostItem.module.css";
 import { Context } from "../../../App";
 import { IPost } from "../../../redux/reducers/postsReducer";
 
-export function PostCard({ id, image, title, text, date }: IPost) {
-  const { isDark } = useContext(Context);
+export function PostCard({ id, image, title, text, date, onClick }: IPost) {
+  const { theme } = useContext(Context);
   return (
     <div
-      key={id}
-      className={isDark ? `${styles.wrapperDark}` : `${styles.wrapper}`}
+      className={styles.wrapper}
+      style={{
+        background: theme.colorOfCard,
+      }}
+      onClick={onClick}
     >
       <img className={styles.img} src={image} />
       <div>
-        <h1 className={isDark ? `${styles.titleDark}` : `${styles.title}`}>
+        <h1
+          className={styles.title}
+          style={{
+            color: theme.text,
+          }}
+        >
           {title}
         </h1>
-        <p className={isDark ? `${styles.textDark}` : `${styles.text}`}>
+        <p
+          className={styles.text}
+          style={{
+            color: theme.grayText,
+          }}
+        >
           {text}
         </p>
-        <p className={isDark ? `${styles.dateDark}` : `${styles.date}`}>
+        <p
+          className={styles.date}
+          style={{
+            color: theme.timeText,
+          }}
+        >
           {date.split("-").reverse().join(".")}
         </p>
       </div>

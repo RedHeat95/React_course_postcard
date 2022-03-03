@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 
 import styles from "./ErrorPage.module.css";
-import { Button } from "../Buttons/Button";
+import { Button } from "../Buttons/Button/Button";
 
 export const ErrorPage = () => {
   const history = useHistory();

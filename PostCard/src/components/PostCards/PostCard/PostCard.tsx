@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,18 +7,16 @@ import { IPost } from "../../../redux/reducers/postsReducer";
 import { deletePost, fetchPost } from "../../../redux/actions/postsActions";
 
 import styles from "./PostCard.module.css";
+import { Container } from "../../Container/Container";
+import { Title } from "../../Title/Title";
 import { PostCard } from "../PostCardItem/PostItem";
-import { Button } from "../../Buttons/Button";
+import { Button } from "../../Buttons/Button/Button";
 import { Preloader } from "../../Preloader/Preloader";
 
-export interface IPostCardWithId extends IPost {
-  postId: string;
-}
-
 export const Post = () => {
-  const params: IPostCardWithId = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
+  const params: { postId: string } = useParams();
 
   const post = useSelector((state: IState) => state.postsReducer.post);
 
@@ -31,8 +29,8 @@ export const Post = () => {
   }, []);
 
   return post.title ? (
-    <div className={styles.wrapper}>
-      <h1 className={styles.selectPostTitle}>Selected post</h1>
+    <Container>
+      <Title text="Selected post" />
       <div className={styles.selectPost}>
         <PostCard
           id={post.id}
@@ -45,7 +43,7 @@ export const Post = () => {
       <div className={styles.showMore}>
         <Button text="Back" onClick={() => history.goBack()} />
       </div>
-    </div>
+    </Container>
   ) : (
     <Preloader />
   );

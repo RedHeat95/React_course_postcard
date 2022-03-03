@@ -5,29 +5,33 @@ import "./App.css";
 import { store } from "./redux/store";
 import { RootRouter } from "./navigation/RootRouter";
 
-export const Context = createContext({
-  isDark: false,
-  changeIsDark: () => {},
-  theme: {},
-});
-
-const darkTheme = {
+export const darkTheme = {
+  background: "#016EFC",
+  colorOfCard: "#0060DC",
+  nameText: "#FFFFFF",
   text: "#FFFFFF",
   grayText: "#FFFFFF",
   timeText: "#FFFFFF",
-  colorOfCard: "#016EFC",
-  backgroundColor: "#0060DC",
-  filter: "brightness(0) invert(1)",
+  button: "#ffffff",
+  buttonColor: "#007bff",
 };
 
-const lightTheme = {
+export const lightTheme = {
+  background: "#F8FAFE",
+  colorOfCard: "#FFFFFF",
+  nameText: "#016EFC",
   text: "#4F4F4F",
   grayText: "#979797",
   timeText: "#016EFC",
-  colorOfCard: "#FFFFFF",
-  backgroundColor: "#F8FAFE",
-  filter: "none",
+  button: "#007bff",
+  buttonColor: "#ffffff",
 };
+
+export const Context = createContext({
+  isDark: false,
+  changeIsDark: () => {},
+  theme: lightTheme,
+});
 
 export function App() {
   const [isDark, setIsDark] = useState(false);
@@ -45,10 +49,9 @@ export function App() {
         }}
       >
         <div
+          className="app"
           style={{
-            background: isDark
-              ? darkTheme.backgroundColor
-              : lightTheme.backgroundColor,
+            background: isDark ? darkTheme.background : lightTheme.background,
           }}
         >
           <RootRouter />

@@ -16,7 +16,7 @@ export const Header = () => {
   };
 
   return (
-    <nav className={styles.nav}>
+    <nav className={styles.header}>
       <HeaderMenu openNavBar={openNavBar} />
       {isActive ? <NavBar closeNavBar={closeNavBar} /> : null}
     </nav>

@@ -5,27 +5,41 @@
 .navBar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  max-width: 85rem;
-  margin: 0 auto;
-  padding: 2.9rem 0 4.5rem;
+  align-items: flex-end;
+  padding: 3rem 0 4rem;
 }
 
 .imgClose {
-  cursor: pointer;
   color: #ffffff;
+  cursor: pointer;
+}
+
+.userEnter {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 0 0 6.5rem;
+}
+
+.userOut {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0 0 6.5rem;
+}
+
+.userPosts {
+  display: flex;
+  flex-direction: column;
 }
 
 .logReg {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  padding: 2.2rem 0 0 6.5rem;
 }
 
-.logReg > .allPosts,
-.logReg > .log,
-.logReg > .reg {
+.namePage {
+  font-family: Raleway;
+  font-style: normal;
   font-weight: 500;
   font-size: 25px;
   line-height: 29px;
@@ -34,6 +48,16 @@
   text-decoration: none;
 }
 
+.exitBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.userPosts :last-child,
 .logReg :last-child {
   padding-bottom: 0;
+}
+
+.namePage > .exit {
+  margin-left: 1rem;
 }

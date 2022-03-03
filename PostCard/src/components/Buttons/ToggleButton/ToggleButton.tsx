@@ -1,27 +1,13 @@
 import { useContext } from "react";
 
 import styles from "./Button.module.css";
-import { Context } from "../../App";
-interface IBtn {
-  text: string;
-  onClick: () => void;
-}
-
-export const Button = ({ text, onClick }: IBtn) => {
-  return (
-    <div className={styles.btnWrraper}>
-      <button className={styles.btn} onClick={onClick}>
-        {text}
-      </button>
-    </div>
-  );
-};
+import { Context } from "../../../App";
 
 interface IBtnTogle {
   onClick: () => void;
 }
 
-export const ButtonTogle = ({ onClick }: IBtnTogle) => {
+export const ToggleButton = ({ onClick }: IBtnTogle) => {
   const { isDark } = useContext(Context);
 
   return (

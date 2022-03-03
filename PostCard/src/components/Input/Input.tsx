@@ -1,27 +1,34 @@
-import { ChangeEventHandler, KeyboardEventHandler } from "react";
+import { ChangeEventHandler, KeyboardEventHandler, useContext } from "react";
 
 import styles from "./Input.module.css";
+import { Context } from "../../App";
 
 interface IProps {
   value: string;
-  text?: string;
   type?: string;
+  label?: string;
   error?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
 
 export const Input = ({
-  value,
-  text,
   type = "text",
+  value,
+  label,
   error,
   onChange,
   onKeyDown,
 }: IProps) => {
+  const { theme } = useContext(Context);
+
   return (
-    <div className={styles.inputBox}>
-      <p className={styles.inputName}>{text}</p>
+    <label className={styles.inputBox}>
+      {label ? (
+        <p className={styles.inputName} style={{ color: theme.text }}>
+          {label}
+        </p>
+      ) : null}
 
       <input
         className={`${styles.input} ${error ? styles.error : ""} `}
@@ -31,6 +38,6 @@ export const Input = ({
         onKeyDown={onKeyDown}
       />
       {error ? <p>{error}</p> : null}
-    </div>
+    </label>
   );
 };

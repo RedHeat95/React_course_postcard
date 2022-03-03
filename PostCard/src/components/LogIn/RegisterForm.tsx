@@ -1,92 +1,123 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
+import { IState } from "../../redux/store";
+import { register } from "../../redux/actions/authActions";
 import { validationService } from "../../services/validation";
 
 import { Input } from "../Input/Input";
-import { Button } from "../Buttons/Button";
+import { Button } from "../Buttons/Button/Button";
 
 export const RegisterForm = () => {
-  const [userName, setUserName] = useState<string>("");
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [username, setUserName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [repeatPassword, setRepeatPassword] = useState<string>("");
+
+  const error = useSelector((state: IState) => state.authReducer.error);
+  const emailState = useSelector((state: IState) => state.authReducer.email);
+
+  useEffect(() => {
+    if (emailState) {
+      history.push("/confirm");
+    }
+  }, [emailState]);
 
   const [errors, setErrors] = useState({
-    userName: "",
+    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    repeatPassword: "",
   });
 
-  const inChangeUserName = useCallback((event) => {
+  const onChangeUserName = useCallback((event) => {
     const value = event.target.value;
     setUserName(value);
+
     const error = validationService.validateName(value);
+
     setErrors((errors) => ({ ...errors, userName: error }));
   }, []);
 
-  const inChangeEmail = useCallback((event) => {
+  const onChangeEmail = useCallback((event) => {
     const value = event.target.value;
     setEmail(value);
+
     const error = validationService.validateEmail(value);
+
     setErrors((errors) => ({ ...errors, email: error }));
   }, []);
 
-  const inChangePassword = useCallback((event) => {
+  const onChangePassword = useCallback((event) => {
     const value = event.target.value;
     setPassword(value);
+
     const error = validationService.validatePassword(value);
+
     setErrors((errors) => ({ ...errors, password: error }));
   }, []);
 
-  const inChangeConfirmPassword = useCallback((event) => {
-    setConfirmPassword(event.target.value);
+  const onChangeRepeatPassword = useCallback((event) => {
+    setRepeatPassword(event.target.value);
   }, []);
 
   const onClick = () => {
     const errors = {
-      userName: validationService.validateName(userName),
+      username: validationService.validateName(username),
       email: validationService.validateEmail(email),
       password: validationService.validatePassword(password),
-      confirmPassword: validationService.validateRepeatedPassword(
+      repeatPassword: validationService.validateRepeatedPassword(
         password,
-        confirmPassword
+        repeatPassword
       ),
     };
     setErrors(errors);
+
+    const values = Object.values(errors);
+    const isValid = values.every((value) => value === "");
+
+    if (isValid) {
+      dispatch(register({ username, email, password }));
+    }
   };
+  const errorValues = error ? Object.values(error).flat() : "";
 
   return (
     <>
       <Input
         type="text"
-        text="User name"
-        value={userName}
-        onChange={inChangeUserName}
-        error={errors.userName}
+        label="User name"
+        value={username}
+        onChange={onChangeUserName}
+        error={errors.username}
       />
       <Input
         type="email"
-        text="Email"
+        label="Email"
         value={email}
-        onChange={inChangeEmail}
+        onChange={onChangeEmail}
         error={errors.email}
       />
       <Input
         type="password"
-        text="Password"
+        label="Password"
         value={password}
-        onChange={inChangePassword}
+        onChange={onChangePassword}
         error={errors.password}
       />
       <Input
         type="password"
-        text="Confirm password"
-        value={confirmPassword}
-        onChange={inChangeConfirmPassword}
-        error={errors.confirmPassword}
+        label="Confirm password"
+        value={repeatPassword}
+        onChange={onChangeRepeatPassword}
+        error={errors.repeatPassword}
       />
-      <Button text="Login" onClick={onClick} />
+      {<p>{errorValues}</p>}
+      <Button text="Registration" onClick={onClick} />
     </>
   );
 };

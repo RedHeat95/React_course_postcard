@@ -3,63 +3,72 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IState, store } from "../../../redux/store";
-import { fetchPosts, searchPosts } from "../../../redux/actions/postsActions";
+import {
+  fetchPosts,
+  searchPosts,
+  fetchMorePosts,
+} from "../../../redux/actions/postsActions";
 import { IPost } from "../../../redux/reducers/postsReducer";
 
 import styles from "./PostCardList.module.css";
-import { PostCard } from "../PostCardItem/PostItem";
-import { Search } from "../../Search/Search";
-import { Button } from "../../Buttons/Button";
-import { idText } from "typescript";
+import { Container } from "../../Container/Container";
+import { Title } from "../../Title/Title";
+import { Button } from "../../Buttons/Button/Button";
+import { Input } from "../../Input/Input";
 
-const LIMIT = 4;
+import { PostCard } from "../PostCardItem/PostItem";
 
 function debounce(fun: (text: string) => void, ms: number) {
   let isCooldown = false;
+  let prevSearchText = "";
 
   return function (searchText: string) {
+    prevSearchText = searchText;
+
     if (isCooldown) {
       return;
     }
 
     fun(searchText);
     isCooldown = true;
-    console.log(searchText, isCooldown);
+
     setTimeout(() => {
       isCooldown = false;
-      console.log("isCooldown", isCooldown);
+
+      if (prevSearchText !== searchText) {
+        fun(prevSearchText);
+      }
     }, ms);
   };
 }
 
 const delayedSearch = debounce(
   (text: string) => store.dispatch(searchPosts(text)),
-  1000
+  500
 );
 
 export const PostCards = () => {
-  const [offset, setOffset] = useState(1);
-  const [search, setSearch] = useState("");
-
   const history = useHistory();
   const dispatch = useDispatch();
 
-  // const [count, setCount] = useState(0);
-  // const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   const posts = useSelector((state: IState) => state.postsReducer.posts);
+  const count = useSelector((state: IState) => state.postsReducer.count);
 
   useEffect(() => {
     dispatch(fetchPosts());
-  }, [offset]);
+  }, []);
 
-  useEffect(() => {
-    delayedSearch(search);
-  }, [search]);
+  const loadMore = useCallback(() => {
+    dispatch(fetchMorePosts());
+  }, []);
 
   const onChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       setSearch(event.target.value);
+
+      delayedSearch(event.target.value);
     },
     [setSearch]
   );
@@ -73,51 +82,52 @@ export const PostCards = () => {
     [search]
   );
 
-  const postsSliced = posts.slice(0, LIMIT * offset);
-
-  const showMore = useCallback(() => {
-    setOffset(offset + 1);
-  }, [posts]);
-
   return (
-    <div className={styles.wrapper}>
+    <Container>
       <div className={styles.title}>
-        <div className={styles.titleBtn}>
-          <p className={styles.allPostsTitle}>All posts</p>
+        <div className={styles.titleWithBtn}>
+          <Title text="All posts" />
           <Button text="+ Add" onClick={() => {}} />
         </div>
-        <Search value={search} onChange={onChange} onKeyDown={onKeyDown} />
+
+        <div className={styles.search}>
+          <Title text="Search" />
+          <Input value={search} onChange={onChange} onKeyDown={onKeyDown} />
+        </div>
       </div>
-      {posts ? (
+
+      {posts.length ? (
         <>
           <div className={styles.allPosts}>
-            {postsSliced.map((item: IPost) => (
-              <div
-                key={item.id}
+            {posts.map((item) => (
+              <PostCard
+                key={item.id + Math.random().toString(16).slice(2)}
+                id={item.id}
+                image={item.image}
+                title={item.title}
+                text={item.text}
+                date={item.date}
                 onClick={() => {
                   history.push("/post/" + item.id);
                 }}
-              >
-                <PostCard
-                  id={item.id}
-                  image={item.image}
-                  title={item.title}
-                  text={item.text}
-                  date={item.date}
-                />
-              </div>
+              />
             ))}
           </div>
 
           <div className={styles.showMore}>
-            <Button text="Show more" onClick={showMore} />
+            {posts.length !== count ? (
+              <Button
+                text="Show more"
+                onClick={() => {
+                  loadMore();
+                }}
+              />
+            ) : null}
           </div>
         </>
       ) : (
-        <div>
-          <h1>NO posts...</h1>
-        </div>
+        <Title text="NO posts..." />
       )}
-    </div>
+    </Container>
   );
 };
