@@ -1,0 +1,63 @@
+.navBarWrraper {
+  background: #016efc;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 3rem 0 4rem;
+}
+
+.imgClose {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.userEnter {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 0 0 6.5rem;
+}
+
+.userOut {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0 0 6.5rem;
+}
+
+.userPosts {
+  display: flex;
+  flex-direction: column;
+}
+
+.logReg {
+  display: flex;
+  flex-direction: column;
+}
+
+.namePage {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  padding-bottom: 1rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.exitBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.userPosts :last-child,
+.logReg :last-child {
+  padding-bottom: 0;
+}
+
+.namePage > .exit {
+  margin-left: 1rem;
+}

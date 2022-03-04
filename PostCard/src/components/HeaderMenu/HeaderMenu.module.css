@@ -1,0 +1,33 @@
+.headerMenu {
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  padding: 3rem 0;
+}
+
+.burgerMenu {
+  margin-right: 2.5rem;
+  cursor: pointer;
+}
+
+.userBox {
+  display: flex;
+}
+
+.userAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  margin-right: 1rem;
+  background-color: #ffffff;
+  border-radius: 100px;
+}
+
+.userName {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 145.2%;
+}

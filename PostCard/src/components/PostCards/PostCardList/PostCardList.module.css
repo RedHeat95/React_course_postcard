@@ -1,0 +1,22 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+
+.titleWithBtn,
+.search {
+  display: flex;
+  align-items: center;
+}
+
+.allPosts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.showMore {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}

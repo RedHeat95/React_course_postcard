@@ -1,0 +1,40 @@
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+.inputName {
+  width: 100%;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  text-align: start;
+  background: #f5f9ff;
+  border: 4px solid #82a9ff;
+  border-radius: 12.5rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  color: #254050;
+  padding: 0.5rem 1rem;
+}
+
+.input:focus-visible {
+  outline: none;
+}
+
+.error {
+  border-color: 4px solid #ff0000;
+}

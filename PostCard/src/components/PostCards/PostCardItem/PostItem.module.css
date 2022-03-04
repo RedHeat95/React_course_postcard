@@ -1,0 +1,47 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 21rem;
+  margin: 1rem 2.5rem 0.5rem 0;
+  padding: 1.5rem;
+  border-radius: 13px;
+  cursor: pointer;
+}
+
+.img {
+  margin-bottom: 0.5rem;
+  height: 7.5rem;
+  border-radius: 11px;
+  object-fit: cover;
+}
+
+.title {
+  padding-bottom: 0.5rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.text {
+  max-width: 18.5rem;
+  padding-bottom: 0.5rem;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #016efc;
+}

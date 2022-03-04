@@ -1,0 +1,63 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.formWrapper {
+  max-width: 24rem;
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+.formTitle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.active {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  color: #016efc;
+}
+
+.inactive {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  color: #75869b;
+}
+
+.borderline {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #254050;
+}
+
+.formText {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 134%;
+}
+
+.formText > a {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 134%;
+  text-decoration: none;
+  padding-left: 1rem;
+}

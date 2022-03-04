@@ -1,0 +1,7 @@
+.wrraper {
+  transform: translateY(30vh);
+}
+.title {
+  display: flex;
+  justify-content: center;
+}
