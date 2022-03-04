@@ -21,7 +21,7 @@ export const NavBar = ({ closeNavBar }: IProps) => {
         <div className={styles.navBar}>
           <div>
             <div className={styles.imgClose}>
-              <img src="../img/Frame.png" onClick={closeNavBar} />
+              <img src="../img/frame.png" onClick={closeNavBar} />
             </div>
             <div className={isLoggedIn ? styles.userEnter : styles.userOut}>
               <NavLink

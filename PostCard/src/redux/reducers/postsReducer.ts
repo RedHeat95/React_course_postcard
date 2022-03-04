@@ -6,7 +6,6 @@ export interface IPost {
   title: string;
   text: string;
   date: string;
-  onClick?: () => void;
 }
 
 export interface IPostsState {

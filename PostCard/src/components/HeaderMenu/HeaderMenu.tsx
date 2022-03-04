@@ -23,7 +23,7 @@ export const HeaderMenu = ({ text = "Username", openNavBar }: IProps) => {
         <div className={styles.headerMenu}>
           <img
             className={styles.burgerMenu}
-            src={isDark ? "../img/MenuForDark.png" : "../img/MenuForWhite.png"}
+            src={isDark ? "../img/menuForDark.png" : "../img/menuForWhite.png"}
             alt="menu"
             onClick={openNavBar}
           />
@@ -31,7 +31,7 @@ export const HeaderMenu = ({ text = "Username", openNavBar }: IProps) => {
             <div className={styles.userBox}>
               <div className={styles.userAvatar}>
                 <img
-                  src={isLoggedIn ? "../img/Icon_information.png" : ""}
+                  src={isLoggedIn ? "../img/iconInformation.png" : ""}
                   alt="avatar"
                 />
               </div>

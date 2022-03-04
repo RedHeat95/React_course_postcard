@@ -4,7 +4,11 @@ import styles from "./PostItem.module.css";
 import { Context } from "../../../App";
 import { IPost } from "../../../redux/reducers/postsReducer";
 
-export function PostCard({ id, image, title, text, date, onClick }: IPost) {
+interface IProps extends IPost {
+  onClick?: () => void;
+}
+
+export function PostCard({ id, image, title, text, date, onClick }: IProps) {
   const { theme } = useContext(Context);
   return (
     <div
