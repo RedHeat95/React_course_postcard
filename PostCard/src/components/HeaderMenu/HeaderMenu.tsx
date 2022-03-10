@@ -1,8 +1,10 @@
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 
 import styles from "./HeaderMenu.module.css";
-import { Context } from "../../App";
+import { IState } from "../../redux/store";
 import { Container } from "../Container/Container";
+import { ThemeContext } from "../../context/ThemeContext";
 
 interface IProps {
   text?: string;
@@ -10,16 +12,20 @@ interface IProps {
 }
 
 export const HeaderMenu = ({ text = "Username", openNavBar }: IProps) => {
-  const { isDark, theme } = useContext(Context);
-  const isLoggedIn = true;
+  const { isDark, theme } = useContext(ThemeContext);
+
+  const { isLoggedIn, username } = useSelector(
+    (state: IState) => state.authReducer
+  );
 
   return (
     <div
+      className={styles.header}
       style={{
         background: theme.background,
       }}
     >
-      <Container>
+      <Container isImage={false}>
         <div className={styles.headerMenu}>
           <img
             className={styles.burgerMenu}
@@ -41,7 +47,7 @@ export const HeaderMenu = ({ text = "Username", openNavBar }: IProps) => {
                   color: theme.nameText,
                 }}
               >
-                {text}
+                {username}
               </p>
             </div>
           ) : null}

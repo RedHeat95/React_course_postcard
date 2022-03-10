@@ -1,9 +1,8 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IState } from "../../../redux/store";
-import { IPost } from "../../../redux/reducers/postsReducer";
 import { deletePost, fetchPost } from "../../../redux/actions/postsActions";
 
 import styles from "./PostCard.module.css";
@@ -29,7 +28,7 @@ export const Post = () => {
   }, []);
 
   return post.title ? (
-    <Container>
+    <Container isImage={false}>
       <Title text="Selected post" />
       <div className={styles.selectPost}>
         <PostCard

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import styles from "./Button.module.css";
-import { Context } from "../../../App";
+import { ThemeContext } from "../../../context/ThemeContext";
 
 interface IBtn {
   text: string;
@@ -9,7 +9,7 @@ interface IBtn {
 }
 
 export const Button = ({ text, onClick }: IBtn) => {
-  const { theme } = useContext(Context);
+  const { theme } = useContext(ThemeContext);
   return (
     <div>
       <button

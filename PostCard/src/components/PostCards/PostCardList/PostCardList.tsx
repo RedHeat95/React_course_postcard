@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IState, store } from "../../../redux/store";
@@ -8,7 +8,6 @@ import {
   searchPosts,
   fetchMorePosts,
 } from "../../../redux/actions/postsActions";
-import { IPost } from "../../../redux/reducers/postsReducer";
 
 import styles from "./PostCardList.module.css";
 import { Container } from "../../Container/Container";
@@ -83,11 +82,13 @@ export const PostCards = () => {
   );
 
   return (
-    <Container>
+    <Container isImage={false}>
       <div className={styles.title}>
         <div className={styles.titleWithBtn}>
           <Title text="All posts" />
-          <Button text="+ Add" onClick={() => {}} />
+          <NavLink to="/addpost" exact>
+            <Button text="+ Add" onClick={() => {}} />
+          </NavLink>
         </div>
 
         <div className={styles.search}>

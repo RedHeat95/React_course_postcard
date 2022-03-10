@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 
 import { IState } from "../store";
 import { ACTIONS } from "../constants";
+import { registerUser, loginUser, getProfile } from "../../services/auth";
 
 interface IRegisterData {
   username: string;
@@ -10,27 +11,11 @@ interface IRegisterData {
 }
 
 export const register = ({ username, email, password }: IRegisterData) => {
-  return async (dispatch: Dispatch, getState: () => IState) => {
+  return async (dispatch: Dispatch) => {
     try {
-      const response = await fetch(
-        "https://studapi.teachmeskills.by/auth/users/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, email, password }),
-        }
-      );
-      const result = await response.json();
+      const result = await registerUser(username, email, password);
 
-      if (response.ok === false) {
-        throw result;
-      }
-
-      if (response.ok) {
-        dispatch(registerSuccess(result));
-      }
+      dispatch(registerSuccess(result));
     } catch (error: any) {
       dispatch(registerFailure(error));
     }
@@ -53,6 +38,28 @@ interface IProfile {
 const registerSuccess = (profile: IProfile) => {
   return {
     type: ACTIONS.REGISTER_SUCCESS,
+    ...profile,
+  };
+};
+
+export const login = (email: string, password: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const { access, refresh } = await loginUser(email, password);
+      localStorage.setItem("access", access);
+      localStorage.setItem("refresh", refresh);
+
+      const profile = await getProfile();
+      dispatch(loginSuccess(profile));
+    } catch (error) {
+      dispatch(registerFailure(error));
+    }
+  };
+};
+
+const loginSuccess = (profile: IProfile) => {
+  return {
+    type: ACTIONS.LOGIN_SUCCESS,
     ...profile,
   };
 };

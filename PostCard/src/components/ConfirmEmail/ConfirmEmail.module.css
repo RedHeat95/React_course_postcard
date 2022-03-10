@@ -1,0 +1,28 @@
+.confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 5rem;
+}
+
+.confirmBoxText {
+  margin-bottom: 5rem;
+}
+
+.confirmText {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 134%;
+}
+
+.send {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 134%;
+  text-decoration: none;
+}
