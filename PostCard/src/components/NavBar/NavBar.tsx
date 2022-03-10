@@ -1,8 +1,11 @@
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import styles from "./NavBar.module.css";
-import { Context } from "../../App";
+import { IState } from "../../redux/store";
+import { ThemeContext } from "../../context/ThemeContext";
+
 import { Container } from "../Container/Container";
 import { ToggleButton } from "../Buttons/ToggleButton/ToggleButton";
 
@@ -11,13 +14,15 @@ interface IProps {
 }
 
 export const NavBar = ({ closeNavBar }: IProps) => {
-  const { changeIsDark } = useContext(Context);
-  // const isLoggedIn = true;
-  const isLoggedIn = false;
+  const { isDark, changeIsDark } = useContext(ThemeContext);
+
+  const isLoggedIn = useSelector(
+    (state: IState) => state.authReducer.isLoggedIn
+  );
 
   return (
     <div className={styles.navBarWrraper}>
-      <Container>
+      <Container isImage={false}>
         <div className={styles.navBar}>
           <div>
             <div className={styles.imgClose}>
@@ -46,7 +51,7 @@ export const NavBar = ({ closeNavBar }: IProps) => {
                   <NavLink
                     className={styles.namePage}
                     onClick={closeNavBar}
-                    to="/*"
+                    to="/addpost"
                     exact
                   >
                     + Add posts
@@ -89,7 +94,12 @@ export const NavBar = ({ closeNavBar }: IProps) => {
             ) : (
               ""
             )}
-            <ToggleButton onClick={changeIsDark} />
+            <ToggleButton
+              inputChecked={isDark}
+              onChange={() => {
+                changeIsDark();
+              }}
+            />
           </div>
         </div>
       </Container>

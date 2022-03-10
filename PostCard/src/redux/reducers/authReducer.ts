@@ -5,6 +5,7 @@ export interface IAuthState {
   id: number;
   username: string;
   email: string;
+  isLoggedIn: boolean;
 }
 
 const defaultState: IAuthState = {
@@ -12,6 +13,7 @@ const defaultState: IAuthState = {
   id: 0,
   username: "",
   email: "",
+  isLoggedIn: false,
 };
 
 export const authReducer = (state = defaultState, action: any) => {
@@ -26,6 +28,17 @@ export const authReducer = (state = defaultState, action: any) => {
       id: action.id,
       username: action.username,
       email: action.email,
+    };
+  }
+
+  if (action.type === ACTIONS.LOGIN_SUCCESS) {
+    return {
+      ...state,
+      error: null,
+      id: action.id,
+      username: action.username,
+      email: action.email,
+      isLoggedIn: true,
     };
   }
   return state;

@@ -4,6 +4,8 @@ import { IState } from "../store";
 import { ACTIONS } from "../constants";
 import { IPost } from "../reducers/postsReducer";
 
+import { getPosts, LIMIT } from "../../services/posts";
+
 export const addPosts = (posts: IPost[], count: number, offset: number = 0) => {
   return {
     type: ACTIONS.ADD_POSTS,
@@ -13,8 +15,6 @@ export const addPosts = (posts: IPost[], count: number, offset: number = 0) => {
   };
 };
 
-const LIMIT = 5;
-
 export const fetchPosts = () => {
   return async (dispatch: Dispatch, getState: () => IState) => {
     const {
@@ -22,11 +22,7 @@ export const fetchPosts = () => {
     } = getState();
 
     if (offset === 0) {
-      const response = await fetch(
-        `https://studapi.teachmeskills.by/blog/posts/?limit=${LIMIT}&offset=${0}`
-      );
-
-      const result = await response.json();
+      const result = await getPosts(0);
 
       dispatch(addPosts(result.results, result.count));
     }
@@ -39,13 +35,7 @@ export const fetchMorePosts = () => {
       postsReducer: { offset, posts },
     } = getState();
 
-    const response = await fetch(
-      `https://studapi.teachmeskills.by/blog/posts/?limit=${LIMIT}&offset=${
-        offset + LIMIT
-      }`
-    );
-
-    const result = await response.json();
+    const result = await getPosts(offset + 5);
 
     dispatch(
       addPosts([...posts, ...result.results], result.count, offset + LIMIT)
@@ -53,14 +43,14 @@ export const fetchMorePosts = () => {
   };
 };
 
-export const addPost = (post: any) => {
+export const addPost = (post: IPost) => {
   return {
     type: ACTIONS.ADD_POST,
     post: post,
   };
 };
 
-export function fetchPost(id: string) {
+export const fetchPost = (id: string) => {
   return async (dispatch: Dispatch) => {
     const response = await fetch(
       "https://studapi.teachmeskills.by/blog/posts/" + id
@@ -69,11 +59,11 @@ export function fetchPost(id: string) {
 
     dispatch(addPost(post));
   };
-}
+};
 
-export function deletePost() {
+export const deletePost = () => {
   return { type: ACTIONS.DELETE_POST };
-}
+};
 
 export const searchPosts = (search: string) => {
   return async (dispatch: Dispatch) => {

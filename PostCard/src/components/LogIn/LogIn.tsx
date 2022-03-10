@@ -1,15 +1,14 @@
 import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { Container } from "../Container/Container";
-import { Vector } from "../Vector/Vector";
 
 import styles from "./LogIn.module.css";
-import { Context } from "../../App";
+import { ThemeContext } from "../../context/ThemeContext";
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 
 export const LogIn = () => {
-  const { theme } = useContext(Context);
+  const { theme } = useContext(ThemeContext);
 
   const location = useLocation();
 
@@ -24,7 +23,7 @@ export const LogIn = () => {
   };
 
   return (
-    <Container>
+    <Container isImage={true}>
       <div className={styles.wrapper}>
         <div className={styles.formWrapper}>
           <div className={styles.formTitle}>
@@ -59,7 +58,6 @@ export const LogIn = () => {
             </a>
           </p>
         )}
-        <Vector />
       </div>
     </Container>
   );

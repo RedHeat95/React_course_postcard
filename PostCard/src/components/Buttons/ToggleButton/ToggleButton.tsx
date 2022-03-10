@@ -1,25 +1,19 @@
-import { useContext } from "react";
+import styles from "./ToggleButton.module.css";
 
-import styles from "./Button.module.css";
-import { Context } from "../../../App";
-
-interface IBtnTogle {
-  onClick: () => void;
+interface IProps {
+  inputChecked: boolean;
+  onChange: () => void;
 }
 
-export const ToggleButton = ({ onClick }: IBtnTogle) => {
-  const { isDark } = useContext(Context);
-
+export const ToggleButton = ({ inputChecked, onChange }: IProps) => {
   return (
-    <label className={styles.switch}>
-      <input type="checkbox" onClick={onClick} />
-      <span
-        className={
-          isDark
-            ? `${styles.round} ${styles.sliderLeft}`
-            : `${styles.round} ${styles.slider}`
-        }
-      ></span>
-    </label>
+    <>
+      <div className={styles.switchCheckbox}>
+        <label className={styles.switch}>
+          <input type="checkbox" onChange={onChange} checked={inputChecked} />
+          <span className={styles.slider}> </span>
+        </label>
+      </div>
+    </>
   );
 };

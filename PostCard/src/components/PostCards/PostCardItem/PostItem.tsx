@@ -1,15 +1,15 @@
 import { useContext } from "react";
 
 import styles from "./PostItem.module.css";
-import { Context } from "../../../App";
 import { IPost } from "../../../redux/reducers/postsReducer";
+import { ThemeContext } from "../../../context/ThemeContext";
 
 interface IProps extends IPost {
   onClick?: () => void;
 }
 
 export function PostCard({ id, image, title, text, date, onClick }: IProps) {
-  const { theme } = useContext(Context);
+  const { theme } = useContext(ThemeContext);
   return (
     <div
       className={styles.wrapper}

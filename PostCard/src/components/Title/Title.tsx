@@ -1,14 +1,14 @@
 import { useContext } from "react";
 
 import styles from "./Title.module.css";
-import { Context } from "../../App";
+import { ThemeContext } from "../../context/ThemeContext";
 
 interface IProps {
   text: string;
 }
 
 export const Title = ({ text }: IProps) => {
-  const { theme } = useContext(Context);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <p
